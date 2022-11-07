@@ -1,8 +1,12 @@
-FROM nginx:latest
+FROM node:15
 
-WORKDIR /app
-RUN apt-get update && \ 
-    apt-get install vim -y
+WORKDIR /usr/src/app
 
-COPY html/ /usr/share/nginx/html
+COPY . .
+
+EXPOSE 3000
+
+ENTRYPOINT [ "node", "index.js" ] 
+
+
 
