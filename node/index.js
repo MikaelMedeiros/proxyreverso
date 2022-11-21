@@ -12,6 +12,14 @@ const config = {
 
 const connection = mysql.createConnection(config)
 
+function createTableIfNotExists() {
+  let sql = `create table if not exists people(
+        id int primary key auto_increment,
+        name varchar(55)not null        
+    )`;
+  connection.query(sql);
+}
+
 const sql =`INSERT INTO people(name) values ('Mikael Medeiros')`
 
 function getQuantidade(callback){
@@ -48,6 +56,7 @@ function findAllPeople(callback) {
 }
 
 app.get('/', (req,res) => {
+    createTableIfNotExists()
     getQuantidade(function(qtd) {      
         setNewPeople(qtd)
         findAllPeople((peoples) => {
