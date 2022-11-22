@@ -24,6 +24,7 @@ services:
     tty: true
     volumes:
       - ./node:/usr/src/app
+      - /usr/src/app/node_modules
     networks:
       - nodenet
     depends_on:
